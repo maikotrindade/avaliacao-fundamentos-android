@@ -50,47 +50,22 @@ public final class ServiceOrdersRepository {
     public List<ServiceOrder> getAll() {
         DatabaseHelper helper = new DatabaseHelper(AppUtil.CONTEXT);
         SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.query(DatabaseContract.SERVICE_ORDER_TABLE, DatabaseContract.COLUNS, null, null, null, null, DatabaseContract.DATE);
-        List<ServiceOrder> serviceOrders = DatabaseContract.bindList(cursor);
+        Cursor cursor = db.query(DatabaseContract.SERVICE_ORDER_TABLE, DatabaseContract.SERVICE_ORDER_COLUMNS, null, null, null, null, DatabaseContract.DATE);
+        List<ServiceOrder> serviceOrders = DatabaseContract.bindServiceOrderList(cursor);
         db.close();
         helper.close();
         return serviceOrders;
     }
 
-    public User findUser(final String login, final String password) {
-        String[] columns = {DatabaseContract.ID,
-                DatabaseContract.USERNAME,
-                DatabaseContract.PASSWORD
-        };
-
+    public User findUser(final String username, final String password) {
         DatabaseHelper helper = new DatabaseHelper(AppUtil.CONTEXT);
-        SQLiteDatabase database = helper.getWritableDatabase();
-
-        StringBuilder query = new StringBuilder();
-        query.append("SELECT ");
-        query.append(columns);
-        query.append(" FROM ");
-        query.append(DatabaseContract.USER_TABLE);
-        query.append(" WHERE ");
-        query.append(DatabaseContract.USERNAME);
-        query.append(" = ");
-        query.append(login);
-        query.append(" AND ");
-        query.append(DatabaseContract.PASSWORD);
-        query.append(" = ");
-        query.append(password);
-
-        Cursor cursor =  database.rawQuery(query.toString() , null);
-        database.close();
+        SQLiteDatabase db = helper.getReadableDatabase();
+        String where = DatabaseContract.USERNAME + " = ? AND " + DatabaseContract.PASSWORD + " = ? ";
+        String[] args = {username, password};
+        Cursor cursor = db.query(DatabaseContract.USER_TABLE, DatabaseContract.USER_COLUMNS, where, args, null, null, DatabaseContract.USERNAME);
+        User user = DatabaseContract.bindUser(cursor);
+        db.close();
         helper.close();
-        return cursorToUser(cursor);
-    }
-
-    private User cursorToUser(Cursor cursor) {
-        User user = new User();
-        user.setmId(cursor.getInt(0));
-        user.setmUsername(cursor.getString(1));
-        user.setmPassword(cursor.getString(2));
         return user;
     }
 

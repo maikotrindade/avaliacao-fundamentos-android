@@ -109,6 +109,12 @@
             android:layout_height="wrap_content"
             android:hint="@string/lbl_paid" />
 
+        <Switch
+            android:id="@+id/switchActive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/lbl_active" />
+
     </LinearLayout>
 
     <com.wrapp.floatlabelededittext.FloatLabeledEditText

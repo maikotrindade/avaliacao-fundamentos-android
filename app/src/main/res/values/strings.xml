@@ -40,5 +40,6 @@
     <string name="lbl_dollar">"U$"</string>
     <string name="lbl_space">" "</string>
     <string name="lbl_failed_login">Username/password is incorrect</string>
+    <string name="lbl_active">Active?</string>
 
 </resources>

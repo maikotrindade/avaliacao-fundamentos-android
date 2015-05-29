@@ -18,6 +18,7 @@ public class ServiceOrder implements Parcelable {
     private double mValue;
     private boolean mPaid;
     private String mDescription;
+    private boolean mActive;
 
     public ServiceOrder() {
         super();
@@ -87,6 +88,14 @@ public class ServiceOrder implements Parcelable {
         this.mDescription = description;
     }
 
+    public boolean isActive() {
+        return mActive;
+    }
+
+    public void setActive(boolean mActive) {
+        this.mActive = mActive;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -133,6 +142,7 @@ public class ServiceOrder implements Parcelable {
                 ", \"value\":" + mValue +
                 ", \"paid\":" + mPaid +
                 ", \"description\": \"" + mDescription + '\"' +
+                ", \"active\": \"" + mActive + '\"' +
                 "}";
     }
 
@@ -163,6 +173,7 @@ public class ServiceOrder implements Parcelable {
         dest.writeDouble(this.mValue);
         dest.writeByte(mPaid ? (byte) 1 : (byte) 0);
         dest.writeString(this.mDescription);
+        dest.writeByte(mActive ? (byte) 1 : (byte) 0);
     }
 
     private ServiceOrder(Parcel in) {
@@ -170,11 +181,12 @@ public class ServiceOrder implements Parcelable {
         this.mClient = in.readString();
         this.mPhone = in.readString();
         this.mAddress = in.readString();
-        long tmpDate = in.readLong();
-        this.mDate = tmpDate == -1 ? null : new Date(tmpDate);
+        long tmpMDate = in.readLong();
+        this.mDate = tmpMDate == -1 ? null : new Date(tmpMDate);
         this.mValue = in.readDouble();
         this.mPaid = in.readByte() != 0;
         this.mDescription = in.readString();
+        this.mActive = in.readByte() != 0;
     }
 
     public static final Parcelable.Creator<ServiceOrder> CREATOR = new Parcelable.Creator<ServiceOrder>() {

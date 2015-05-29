@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                validateUser(txtLogin.toString(), txtPass.toString());
+                validateUser(txtLogin.getText().toString(), txtPass.getText().toString());
             }
         });
     }

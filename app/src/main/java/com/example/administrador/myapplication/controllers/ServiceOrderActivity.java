@@ -38,7 +38,7 @@ public class ServiceOrderActivity extends AppCompatActivity {
     private static final String TAG = ServiceOrderActivity.class.getSimpleName();
 
     private EditText mEditTextClientName, mEditTextClientPhone, mEditTextAddress, mEditTextDate, mEditTextTime, mEditTextValue, mEditTextDescription;
-    private Switch mSwitchPaid;
+    private Switch mSwitchPaid, mSwitchActive;
     private ServiceOrder mServiceOrder;
 
     @Override
@@ -68,11 +68,17 @@ public class ServiceOrderActivity extends AppCompatActivity {
             mEditTextTime.setText(AppUtil.formatTime(mServiceOrder.getDate()));
             mEditTextValue.setText(AppUtil.formatDecimal(mServiceOrder.getValue()));
             mSwitchPaid.setChecked(mServiceOrder.isPaid());
+            mSwitchActive.setChecked(mServiceOrder.isActive());
             mEditTextDescription.setText(mServiceOrder.getDescription());
         }
         mSwitchPaid.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mServiceOrder.setPaid(isChecked);
+            }
+        });
+        mSwitchActive.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mServiceOrder.setActive(isChecked);
             }
         });
     }
@@ -85,6 +91,7 @@ public class ServiceOrderActivity extends AppCompatActivity {
         mEditTextTime = AppUtil.get(this.findViewById(R.id.editTextTime));
         mEditTextValue = AppUtil.get(this.findViewById(R.id.editTextValue));
         mSwitchPaid = AppUtil.get(this.findViewById(R.id.switchPaid));
+        mSwitchActive = AppUtil.get(this.findViewById(R.id.switchActive));
         mEditTextDescription = AppUtil.get(this.findViewById(R.id.editTextDescription));
 
         //TODO: Explanation 1:

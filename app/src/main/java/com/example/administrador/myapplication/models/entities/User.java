@@ -6,27 +6,27 @@ public class User {
     private String mUsername;
     private String mPassword;
 
-    public Integer getmId() {
+    public Integer getId() {
         return mId;
     }
 
-    public void setmId(Integer mId) {
+    public void setId(Integer mId) {
         this.mId = mId;
     }
 
-    public String getmUsername() {
+    public String getUsername() {
         return mUsername;
     }
 
-    public void setmUsername(String mUsername) {
+    public void setUsername(String mUsername) {
         this.mUsername = mUsername;
     }
 
-    public String getmPassword() {
+    public String getPassword() {
         return mPassword;
     }
 
-    public void setmPassword(String mPassword) {
+    public void setPassword(String mPassword) {
         this.mPassword = mPassword;
     }
 }
