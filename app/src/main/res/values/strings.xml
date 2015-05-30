@@ -45,5 +45,5 @@
     <string name="active">Active</string>
     <string name="inactive">Inactive</string>
     <string name="lbl_currency">"U$ "</string>
-
+    <string name="title_activity_dashboard">DashboardActivity</string>
 </resources>

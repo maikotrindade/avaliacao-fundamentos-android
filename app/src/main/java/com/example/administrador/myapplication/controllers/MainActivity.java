@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         repository = new ServiceOrdersRepository();
         User user = repository.findUser(username, password);
         if (user != null ) {
-            startActivity(new Intent(MainActivity.this, ServiceOrderListActivity.class));
+            startActivity(new Intent(MainActivity.this, DashboardActivity.class));
         } else {
             Toast.makeText(this, getString(R.string.lbl_failed_login), Toast.LENGTH_LONG).show();
         }
