@@ -37,7 +37,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
         switch (v.getId()) {
             case R.id.btnServiceOrder: startActivity(new Intent(DashboardActivity.this, ServiceOrderListActivity.class)); break;
             case R.id.btnReports: startActivity(new Intent(DashboardActivity.this, ReportsActivity.class)); break;
-            case R.id.btnAbout: break;
+            case R.id.btnAbout: startActivity(new Intent(DashboardActivity.this, AboutActivity.class)); break;
 
         }
     }
