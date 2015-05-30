@@ -46,4 +46,8 @@
     <string name="inactive">Inactive</string>
     <string name="lbl_currency">"U$ "</string>
     <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="title_activity_reports">ReportsActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 </resources>
