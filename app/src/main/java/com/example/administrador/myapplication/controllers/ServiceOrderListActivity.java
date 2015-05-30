@@ -30,6 +30,7 @@ public class ServiceOrderListActivity extends AppCompatActivity implements Popup
     public static final int REQUEST_CODE_EDIT = 2;
     private RecyclerView mServiceOrders;
     private ServiceOrderListAdapter mServiceOrdersAdapter;
+    private boolean filterActive = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +62,7 @@ public class ServiceOrderListActivity extends AppCompatActivity implements Popup
     }
 
     private void updateRecyclerItens() {
-        final List<ServiceOrder> serviceOrders = ServiceOrder.getAll();
+        final List<ServiceOrder> serviceOrders = ServiceOrder.getAllByStatus(filterActive);
         if (mServiceOrdersAdapter == null) {
             mServiceOrdersAdapter = new ServiceOrderListAdapter(serviceOrders);
             mServiceOrders.setAdapter(mServiceOrdersAdapter);
@@ -69,6 +70,7 @@ public class ServiceOrderListActivity extends AppCompatActivity implements Popup
             mServiceOrdersAdapter.setItens(serviceOrders);
             mServiceOrdersAdapter.notifyDataSetChanged();
         }
+
     }
 
     @Override
@@ -150,6 +152,10 @@ public class ServiceOrderListActivity extends AppCompatActivity implements Popup
                 if (sendIntent.resolveActivity(getPackageManager()) != null) {
                     startActivity(chooser);
                 }
+                return true;
+            case R.id.actionFilterActives:
+                filterActive = filterActive ? false : true;
+                onResume();
                 return true;
         }
         return super.onOptionsItemSelected(item);

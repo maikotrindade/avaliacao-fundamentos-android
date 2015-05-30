@@ -40,9 +40,11 @@ public final class ServiceOrdersRepository {
     public void delete(ServiceOrder serviceOrder) {
         DatabaseHelper helper = new DatabaseHelper(AppUtil.CONTEXT);
         SQLiteDatabase db = helper.getWritableDatabase();
+        serviceOrder.setActive(false);
         String where = DatabaseContract.ID + " = ?";
         String[] args = {serviceOrder.getId().toString()};
-        db.delete(DatabaseContract.SERVICE_ORDER_TABLE, where, args);
+        db.update(DatabaseContract.SERVICE_ORDER_TABLE, DatabaseContract.getContentValues(serviceOrder), where, args);
+
         db.close();
         helper.close();
     }
@@ -51,6 +53,19 @@ public final class ServiceOrdersRepository {
         DatabaseHelper helper = new DatabaseHelper(AppUtil.CONTEXT);
         SQLiteDatabase db = helper.getReadableDatabase();
         Cursor cursor = db.query(DatabaseContract.SERVICE_ORDER_TABLE, DatabaseContract.SERVICE_ORDER_COLUMNS, null, null, null, null, DatabaseContract.DATE);
+        List<ServiceOrder> serviceOrders = DatabaseContract.bindServiceOrderList(cursor);
+        db.close();
+        helper.close();
+        return serviceOrders;
+    }
+
+
+    public List<ServiceOrder> getAllByStatus(boolean status) {
+        DatabaseHelper helper = new DatabaseHelper(AppUtil.CONTEXT);
+        SQLiteDatabase db = helper.getReadableDatabase();
+        String where = DatabaseContract.ACTIVE + " = ? ";
+        String[] args = {status ? "1" : "0"};
+        Cursor cursor = db.query(DatabaseContract.SERVICE_ORDER_TABLE, DatabaseContract.SERVICE_ORDER_COLUMNS, where, args, null, null, DatabaseContract.DATE);
         List<ServiceOrder> serviceOrders = DatabaseContract.bindServiceOrderList(cursor);
         db.close();
         helper.close();

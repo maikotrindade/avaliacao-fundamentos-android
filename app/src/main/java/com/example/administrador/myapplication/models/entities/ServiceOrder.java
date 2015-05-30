@@ -150,6 +150,10 @@ public class ServiceOrder implements Parcelable {
         return ServiceOrdersRepository.getInstance().getAll();
     }
 
+    public static List<ServiceOrder> getAllByStatus(boolean filterActive) {
+        return ServiceOrdersRepository.getInstance().getAllByStatus(filterActive);
+    }
+
     public void save() {
         ServiceOrdersRepository.getInstance().save(this);
     }

@@ -44,7 +44,7 @@ public final class AppUtil {
     public static String formatDecimal(Number number) {
         final DecimalFormat decimalFormat = AppUtil.get(NumberFormat.getNumberInstance(Locale.US));
         decimalFormat.applyPattern(AppUtil.PATTERN_NUMBER);
-        return CONTEXT.getString(R.string.lbl_dollar) + CONTEXT.getString(R.string.lbl_space) +  decimalFormat.format(number);
+        return decimalFormat.format(number);
     }
 
     private static String format(Date date, String pattern) {

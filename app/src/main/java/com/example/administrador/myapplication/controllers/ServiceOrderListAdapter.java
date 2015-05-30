@@ -45,7 +45,7 @@ public class ServiceOrderListAdapter extends RecyclerView.Adapter<ServiceOrderLi
         final Context context = holder.itemView.getContext();
 
         final ServiceOrder serviceOrder = mItens.get(position);
-        holder.mTxtValue.setText(AppUtil.formatDecimal(serviceOrder.getValue()));
+        holder.mTxtValue.setText(context.getString(R.string.lbl_currency) + AppUtil.formatDecimal(serviceOrder.getValue()));
         if (serviceOrder.isPaid()) {
             holder.mTxtValue.setTextColor(holder.mTxtClient.getTextColors());
         } else {
@@ -65,7 +65,7 @@ public class ServiceOrderListAdapter extends RecyclerView.Adapter<ServiceOrderLi
                 // This context must implements OnMenuItemClickListener
                 popup.setOnMenuItemClickListener((PopupMenu.OnMenuItemClickListener) context);
                 popup.inflate(R.menu.menu_service_order_list_popup);
-                //popup.getMenu();
+
                 popup.show();
             }
         });

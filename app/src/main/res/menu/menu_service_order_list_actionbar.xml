@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".controllers.ServiceOrderActivity">
 
     <item
+        android:id="@+id/actionFilterActives"
+        android:title="@string/filter"
+        android:icon="@mipmap/ic_sort"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/actionShare"
         android:title="@string/lbl_share"
         android:icon="@mipmap/ic_action_share"
