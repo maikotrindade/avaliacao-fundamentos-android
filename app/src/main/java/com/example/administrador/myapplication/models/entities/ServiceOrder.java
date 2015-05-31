@@ -3,7 +3,9 @@ package com.example.administrador.myapplication.models.entities;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.administrador.myapplication.R;
 import com.example.administrador.myapplication.models.persistence.ServiceOrdersRepository;
+import com.example.administrador.myapplication.util.AppUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -19,6 +21,33 @@ public class ServiceOrder implements Parcelable {
     private boolean mPaid;
     private String mDescription;
     private boolean mActive;
+    private ServiceOrderCategory mCategory;
+
+    public enum ServiceOrderCategory {
+
+        UNCATEGORISED (0, R.string.lbl_uncategorised),
+        IMPROVEMENTS (1, R.string.lbl_improvements),
+        SUPPORT (2, R.string.lbl_support),
+        MAINTENANCE (3, R.string.lbl_maintenance),
+        CONSULTANCY (4, R.string.lbl_consultancy);
+
+        final private int id;
+        final private int resource;
+
+        ServiceOrderCategory(int id, int resource) {
+            this.id = id;
+            this.resource = resource;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public String getTitle() {
+            return AppUtil.CONTEXT.getResources().getString(resource);
+        }
+    }
+
 
     public ServiceOrder() {
         super();
@@ -96,6 +125,20 @@ public class ServiceOrder implements Parcelable {
         this.mActive = mActive;
     }
 
+    public Integer getCategory() {
+        return mCategory.getId();
+    }
+
+    public void setCategory(int categoryId) {
+        switch (categoryId) {
+            case 0 : this.mCategory =  ServiceOrderCategory.UNCATEGORISED; break;
+            case 1 : this.mCategory =  ServiceOrderCategory.IMPROVEMENTS; break;
+            case 2 : this.mCategory =  ServiceOrderCategory.SUPPORT; break;
+            case 3 : this.mCategory =  ServiceOrderCategory.MAINTENANCE; break;
+            case 4 : this.mCategory =  ServiceOrderCategory.CONSULTANCY; break;
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -112,7 +155,6 @@ public class ServiceOrder implements Parcelable {
             return false;
         if (mDate != null ? !mDate.equals(that.mDate) : that.mDate != null) return false;
         return !(mDescription != null ? !mDescription.equals(that.mDescription) : that.mDescription != null);
-
     }
 
     @Override
@@ -143,6 +185,7 @@ public class ServiceOrder implements Parcelable {
                 ", \"paid\":" + mPaid +
                 ", \"description\": \"" + mDescription + '\"' +
                 ", \"active\": \"" + mActive + '\"' +
+                ", \"active\": \"" + mCategory.toString() + '\"' +
                 "}";
     }
 
@@ -162,6 +205,7 @@ public class ServiceOrder implements Parcelable {
         ServiceOrdersRepository.getInstance().delete(this);
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -178,6 +222,7 @@ public class ServiceOrder implements Parcelable {
         dest.writeByte(mPaid ? (byte) 1 : (byte) 0);
         dest.writeString(this.mDescription);
         dest.writeByte(mActive ? (byte) 1 : (byte) 0);
+        dest.writeInt(this.mCategory == null ? -1 : this.mCategory.ordinal());
     }
 
     private ServiceOrder(Parcel in) {
@@ -191,6 +236,8 @@ public class ServiceOrder implements Parcelable {
         this.mPaid = in.readByte() != 0;
         this.mDescription = in.readString();
         this.mActive = in.readByte() != 0;
+        int tmpMCategory = in.readInt();
+        this.mCategory = tmpMCategory == -1 ? null : ServiceOrderCategory.values()[tmpMCategory];
     }
 
     public static final Parcelable.Creator<ServiceOrder> CREATOR = new Parcelable.Creator<ServiceOrder>() {

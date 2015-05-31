@@ -29,6 +29,7 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
         final Button btnAbout = (Button) findViewById(R.id.btnAbout);
         btnAbout.setOnClickListener(this);
 
+        mediaPlayer = new MediaPlayer();
         playSexySax();
     }
 
@@ -44,7 +45,6 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
 
     public void playSexySax() {
         try {
-            mediaPlayer = new MediaPlayer();
             if (mediaPlayer.isPlaying()) {
                 mediaPlayer.stop();
                 mediaPlayer.release();
@@ -59,5 +59,14 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
         } catch (Exception e) {
             Log.e(DashboardActivity.class.getName(), e.toString());
         }
+    }
+
+    @Override
+    public void onPause() {
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+        }
+        super.onPause();
     }
 }

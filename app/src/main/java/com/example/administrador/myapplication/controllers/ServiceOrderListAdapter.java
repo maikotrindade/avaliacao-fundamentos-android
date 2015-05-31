@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.administrador.myapplication.R;
 import com.example.administrador.myapplication.models.entities.ServiceOrder;
+import com.example.administrador.myapplication.models.entities.ServiceOrder.ServiceOrderCategory;
 import com.example.administrador.myapplication.util.AppUtil;
 
 import java.util.List;
@@ -53,6 +54,17 @@ public class ServiceOrderListAdapter extends RecyclerView.Adapter<ServiceOrderLi
         }
         holder.mTxtClient.setText(serviceOrder.getClient());
         holder.mTxtClient.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.ic_text_client, 0, 0, 0);
+
+        String categoryTitle = "";
+            switch (serviceOrder.getCategory()) {
+                case 0 : categoryTitle =  ServiceOrderCategory.UNCATEGORISED.getTitle(); break;
+                case 1 : categoryTitle =  ServiceOrderCategory.IMPROVEMENTS.getTitle(); break;
+                case 2 : categoryTitle =  ServiceOrderCategory.SUPPORT.getTitle(); break;
+                case 3 : categoryTitle =  ServiceOrderCategory.MAINTENANCE.getTitle(); break;
+                case 4 : categoryTitle =  ServiceOrderCategory.CONSULTANCY.getTitle(); break;
+            }
+        holder.mTxtCategory.setText(categoryTitle);
+        holder.mTxtCategory.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.ic_category, 0, 0, 0);
         holder.mTxtDate.setText(AppUtil.formatDate(serviceOrder.getDate()));
         holder.mTxtDate.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.ic_text_date, 0, 0, 0);
 
@@ -62,10 +74,11 @@ public class ServiceOrderListAdapter extends RecyclerView.Adapter<ServiceOrderLi
             public void onClick(View v) {
                 mPosition = holder.getLayoutPosition();
                 final PopupMenu popup = new PopupMenu(context, v);
-                // This context must implements OnMenuItemClickListener
                 popup.setOnMenuItemClickListener((PopupMenu.OnMenuItemClickListener) context);
                 popup.inflate(R.menu.menu_service_order_list_popup);
-
+                if (!serviceOrder.isActive()) {
+                    popup.getMenu().findItem(R.id.actionDelete).setVisible(false);
+                }
                 popup.show();
             }
         });
@@ -87,12 +100,14 @@ public class ServiceOrderListAdapter extends RecyclerView.Adapter<ServiceOrderLi
         private final TextView mTxtValue;
         private final TextView mTxtClient;
         private final TextView mTxtDate;
+        private final TextView mTxtCategory;
         private final ImageView mImageViewMenu;
 
         public ViewHolder(View view) {
             super(view);
             mTxtValue = AppUtil.get(view.findViewById(R.id.textViewValue));
             mTxtClient = AppUtil.get(view.findViewById(R.id.textViewClient));
+            mTxtCategory = AppUtil.get(view.findViewById(R.id.textViewCategory));
             mTxtDate = AppUtil.get(view.findViewById(R.id.textViewDate));
             mImageViewMenu = AppUtil.get(view.findViewById(R.id.imageViewMenu));
         }

@@ -30,7 +30,7 @@ public class ServiceOrderListActivity extends AppCompatActivity implements Popup
     public static final int REQUEST_CODE_EDIT = 2;
     private RecyclerView mServiceOrders;
     private ServiceOrderListAdapter mServiceOrdersAdapter;
-    private boolean filterActive = false;
+    private boolean filterActive = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

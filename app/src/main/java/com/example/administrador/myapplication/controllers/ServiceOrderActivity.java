@@ -14,8 +14,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Switch;
 
 import com.example.administrador.myapplication.R;
@@ -25,8 +27,11 @@ import com.example.administrador.myapplication.util.AppUtil;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class ServiceOrderActivity extends AppCompatActivity {
@@ -39,6 +44,7 @@ public class ServiceOrderActivity extends AppCompatActivity {
 
     private EditText mEditTextClientName, mEditTextClientPhone, mEditTextAddress, mEditTextDate, mEditTextTime, mEditTextValue, mEditTextDescription;
     private Switch mSwitchPaid, mSwitchActive;
+    private Spinner mSpinnerCategory;
     private ServiceOrder mServiceOrder;
 
     @Override
@@ -54,6 +60,9 @@ public class ServiceOrderActivity extends AppCompatActivity {
             final Date dateNow = new Date();
             mEditTextDate.setText(AppUtil.formatDate(dateNow));
             mEditTextTime.setText(AppUtil.formatTime(dateNow));
+            mServiceOrder.setPaid(true);
+            mServiceOrder.setActive(true);
+            loadSpinnerCategory();
         } else {
             mServiceOrder = AppUtil.get(extras.getParcelable(EXTRA_SERVICE_ORDER));
 
@@ -70,7 +79,11 @@ public class ServiceOrderActivity extends AppCompatActivity {
             mSwitchPaid.setChecked(mServiceOrder.isPaid());
             mSwitchActive.setChecked(mServiceOrder.isActive());
             mEditTextDescription.setText(mServiceOrder.getDescription());
+
+            loadSpinnerCategory();
+            mSpinnerCategory.setSelection(mServiceOrder.getCategory());
         }
+
         mSwitchPaid.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mServiceOrder.setPaid(isChecked);
@@ -93,8 +106,8 @@ public class ServiceOrderActivity extends AppCompatActivity {
         mSwitchPaid = AppUtil.get(this.findViewById(R.id.switchPaid));
         mSwitchActive = AppUtil.get(this.findViewById(R.id.switchActive));
         mEditTextDescription = AppUtil.get(this.findViewById(R.id.editTextDescription));
+        mSpinnerCategory = (Spinner)findViewById(R.id.spinnerCategory);
 
-        //TODO: Explanation 1:
         mEditTextClientName.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.ic_edittext_client, 0);
         mEditTextClientName.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -106,7 +119,7 @@ public class ServiceOrderActivity extends AppCompatActivity {
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (event.getRawX() >= (mEditTextClientName.getRight() - mEditTextClientName.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                        //TODO: Explanation 2:
+
                         final Intent goToSOContacts = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
                         goToSOContacts.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE); // Show user only contacts w/ phone numbers
                         startActivityForResult(goToSOContacts, REQUEST_CODE_PICK_CONTACT);
@@ -115,6 +128,20 @@ public class ServiceOrderActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+
+    }
+
+    private void loadSpinnerCategory() {
+        List<ServiceOrder.ServiceOrderCategory> enumCategories = new ArrayList<>(Arrays.asList(ServiceOrder.ServiceOrderCategory.values()));
+        List<String> categories = new ArrayList<>();
+        for (ServiceOrder.ServiceOrderCategory enumCategory : enumCategories) {
+            categories.add(enumCategory.getTitle());
+        }
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(
+                this, android.R.layout.simple_spinner_item, categories);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinnerCategory.setAdapter(spinnerArrayAdapter);
     }
 
     @Override
@@ -140,7 +167,6 @@ public class ServiceOrderActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_PICK_CONTACT) {
             if (resultCode == Activity.RESULT_OK) {
-                //TODO: Explanation 3:
                 try {
                     final Uri contactUri = data.getData();
                     final String[] projection = {
@@ -180,6 +206,7 @@ public class ServiceOrderActivity extends AppCompatActivity {
             mServiceOrder.setDate(serviceOrderCalendar.getTime());
             mServiceOrder.setValue(Double.valueOf(mEditTextValue.getText().toString().trim()));
             mServiceOrder.setDescription(mEditTextDescription.getText().toString().trim());
+            mServiceOrder.setCategory(mSpinnerCategory.getSelectedItemPosition());
             mServiceOrder.save();
             super.setResult(RESULT_OK);
             super.finish();

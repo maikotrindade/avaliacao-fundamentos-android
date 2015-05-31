@@ -13,8 +13,6 @@ import java.util.List;
 public class DatabaseContract {
 
     public static final String SERVICE_ORDER_TABLE = "service_order";
-    public static final String USER_TABLE = "user";
-
     public static final String ID = "id";
     public static final String CLIENT = "client";
     public static final String PHONE = "phone";
@@ -22,14 +20,15 @@ public class DatabaseContract {
     public static final String DATE = "date";
     public static final String VALUE = "value";
     public static final String PAID = "paid";
-    public static final String USERNAME = "username";
-    public static final String PASSWORD = "password";
     public static final String DESCRIPTION = "description";
     public static final String ACTIVE = "active";
+    public static final String CATEGORY = "category";
+    public static final String[] SERVICE_ORDER_COLUMNS = {ID, CLIENT, PHONE, ADDRESS, DATE, VALUE, PAID, DESCRIPTION, ACTIVE, CATEGORY};
 
-    public static final String[] SERVICE_ORDER_COLUMNS = {ID, CLIENT, PHONE, ADDRESS, DATE, VALUE, PAID, DESCRIPTION, ACTIVE};
+    public static final String USER_TABLE = "user";
+    public static final String USERNAME = "username";
+    public static final String PASSWORD = "password";
     public static final String[] USER_COLUMNS = {ID, USERNAME, PASSWORD};
-
 
     public static String createTableServiceOrder() {
         final StringBuilder sql = new StringBuilder();
@@ -44,7 +43,8 @@ public class DatabaseContract {
         sql.append(VALUE + " REAL, ");
         sql.append(PAID + " INTEGER, ");
         sql.append(DESCRIPTION + " TEXT, ");
-        sql.append(ACTIVE + " INTEGER ");
+        sql.append(ACTIVE + " INTEGER, ");
+        sql.append(CATEGORY + " INTEGER ");
         sql.append(" ); ");
         return sql.toString();
     }
@@ -80,6 +80,7 @@ public class DatabaseContract {
         content.put(PAID, serviceOrder.isPaid() ? 1 : 0);
         content.put(DESCRIPTION, serviceOrder.getDescription());
         content.put(ACTIVE, serviceOrder.isActive() ? 1 : 0);
+        content.put(CATEGORY, serviceOrder.getCategory());
         return content;
     }
 
@@ -95,6 +96,7 @@ public class DatabaseContract {
             serviceOrder.setPaid(cursor.getInt(cursor.getColumnIndex(PAID)) == 1);
             serviceOrder.setDescription(cursor.getString(cursor.getColumnIndex(DESCRIPTION)));
             serviceOrder.setActive(cursor.getInt(cursor.getColumnIndex(ACTIVE)) == 1);
+            serviceOrder.setCategory(cursor.getInt(cursor.getColumnIndex(CATEGORY)));
             return serviceOrder;
         }
         return null;

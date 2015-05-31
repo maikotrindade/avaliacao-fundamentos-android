@@ -2,8 +2,6 @@ package com.example.administrador.myapplication.util;
 
 import android.content.Context;
 
-import com.example.administrador.myapplication.R;
-
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
