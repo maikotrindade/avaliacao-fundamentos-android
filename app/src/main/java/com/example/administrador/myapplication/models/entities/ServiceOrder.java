@@ -197,6 +197,11 @@ public class ServiceOrder implements Parcelable {
         return ServiceOrdersRepository.getInstance().getAllByStatus(filterActive);
     }
 
+    public static List<ServiceOrder> getAllByStatusAndPayment(boolean filterActive, boolean filterPaid) {
+        return ServiceOrdersRepository.getInstance().getAllByStatusAndPayment(filterActive, filterPaid);
+    }
+
+
     public void save() {
         ServiceOrdersRepository.getInstance().save(this);
     }

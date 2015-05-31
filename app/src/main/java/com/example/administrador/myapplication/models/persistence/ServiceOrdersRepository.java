@@ -72,6 +72,18 @@ public final class ServiceOrdersRepository {
         return serviceOrders;
     }
 
+    public List<ServiceOrder> getAllByStatusAndPayment(boolean status, boolean payment) {
+        DatabaseHelper helper = new DatabaseHelper(AppUtil.CONTEXT);
+        SQLiteDatabase db = helper.getReadableDatabase();
+        String where = DatabaseContract.ACTIVE + " = ? AND " + DatabaseContract.PAID + " = ? ";
+        String[] args = {status ? "1" : "0", payment ? "1" : "0"};
+        Cursor cursor = db.query(DatabaseContract.SERVICE_ORDER_TABLE, DatabaseContract.SERVICE_ORDER_COLUMNS, where, args, null, null, DatabaseContract.DATE);
+        List<ServiceOrder> serviceOrders = DatabaseContract.bindServiceOrderList(cursor);
+        db.close();
+        helper.close();
+        return serviceOrders;
+    }
+
     public User findUser(final String username, final String password) {
         DatabaseHelper helper = new DatabaseHelper(AppUtil.CONTEXT);
         SQLiteDatabase db = helper.getReadableDatabase();

@@ -1,7 +1,10 @@
 <resources>
-    <string name="app_name">My Application</string>
 
-    <string name="title_activity_main">Login</string>
+    <string name="app_name">Odair Service Order</string>
+    <string name="title_activity_main">Odair Service Order</string>
+    <string name="title_activity_dashboard">Dashboard</string>
+    <string name="title_activity_reports">Reports</string>
+    <string name="title_activity_about">About</string>
     <string name="title_activity_service_order">Service Order</string>
     <string name="title_activity_service_order_list">List of Service Orders</string>
 
@@ -45,16 +48,16 @@
     <string name="active">Active</string>
     <string name="inactive">Inactive</string>
     <string name="lbl_currency">"U$ "</string>
-    <string name="title_activity_dashboard">DashboardActivity</string>
-    <string name="title_activity_reports">ReportsActivity</string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_about">AboutActivity</string>
     <string name="lbl_improvements">Improvements</string>
     <string name="lbl_support">Support</string>
     <string name="lbl_maintenance">Maintenance</string>
     <string name="lbl_consultancy">Consultancy</string>
     <string name="lbl_uncategorised">Uncategorised</string>
     <string name="lbl_category">Category</string>
+    <string name="lbl_reportall">Report All Service Orders</string>
+    <string name="msg_error_send_email">There\'s not email client</string>
+    <string name="msg_send_email">Sending email...</string>
+    <string name="lbl_service_order_id">Service Order ID</string>
+    <string name="lbl_email_address">E-mail Address</string>
+    <string name="lbl_submit">Submit</string>
 </resources>

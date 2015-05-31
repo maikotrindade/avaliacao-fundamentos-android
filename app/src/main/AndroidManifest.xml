@@ -3,6 +3,7 @@
     package="com.example.administrador.myapplication" >
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".MyApplication"
@@ -37,7 +38,7 @@
         </activity>
         <activity
             android:name=".controllers.DashboardActivity"
-            android:label="@string/title_activity_dashboard" >
+            android:label="@string/title_activity_dashboard">
         </activity>
         <activity
             android:name=".controllers.ReportsActivity"
