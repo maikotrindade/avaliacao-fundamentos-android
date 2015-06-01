@@ -50,8 +50,6 @@ public class DashboardActivity extends ActionBarActivity implements View.OnClick
             descriptor.close();
             mediaPlayer.prepare();
             mediaPlayer.setVolume(1f, 1f);
-            //this line makes this app more annoying
-            mediaPlayer.setLooping(true);
             mediaPlayer.start();
         } catch (Exception e) {
             Log.e(DashboardActivity.class.getName(), e.toString());
