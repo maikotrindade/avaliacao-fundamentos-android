@@ -17,3 +17,7 @@
 * Visual Odair Extra Elegante  
 * Campo 'categoria' em Ordem de Serviço Odair
 * Geração e envio de 'relatórios' por e-mail
+
+### Autenticação
+ * usuário: admin
+ * senha: admin
