@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -25,7 +24,6 @@ public class ReportsActivity extends ActionBarActivity {
     private EditText editEmail;
     private RadioGroup radioReportsGroup;
     private Button btnSubmit;
-    private RadioButton selectedRadioButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +40,6 @@ public class ReportsActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 int selectedId = radioReportsGroup.getCheckedRadioButtonId();
-                selectedRadioButton = (RadioButton) findViewById(selectedId);
                 switch (selectedId) {
                     case R.id.radioBtnReportAll:
                         if (isValidEmail()) {

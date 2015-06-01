@@ -48,14 +48,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".controllers.ReportsActivity" />
         </activity>
-        <activity
-            android:name=".controllers.AboutActivity"
-            android:label="@string/title_activity_about"
-            android:parentActivityName=".controllers.DashboardActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".controllers.AboutActivity" />
-        </activity>
     </application>
 
 </manifest>

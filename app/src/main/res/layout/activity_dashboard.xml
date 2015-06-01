@@ -9,7 +9,7 @@ tools:context="com.example.administrador.myapplication.controllers.DashboardActi
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    android:layout_weight="0.55">
+    android:layout_weight="0.6">
 
     <ImageView
         android:id="@+id/imageView"
@@ -22,7 +22,7 @@ tools:context="com.example.administrador.myapplication.controllers.DashboardActi
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    android:layout_weight="0.25">
+    android:layout_weight="0.2">
 
     <Button
         android:id="@+id/btnServiceOrder"
@@ -50,15 +50,6 @@ tools:context="com.example.administrador.myapplication.controllers.DashboardActi
         android:layout_marginRight="2sp"
         android:layout_marginLeft="2sp"
         android:text="Reports" />
-
-    <Button
-        android:id="@+id/btnAbout"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1.00"
-        android:layout_marginBottom="2sp"
-        android:layout_marginRight="2sp"
-        android:text="About" />
 </LinearLayout>
 
 
