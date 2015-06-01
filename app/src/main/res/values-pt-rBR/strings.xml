@@ -43,5 +43,23 @@
     <string name="inactive">Inativo</string>
     <string name="lbl_active">Ativo?</string>
     <string name="lbl_best_app"></string>
+    <string name="lbl_category">Categoria</string>
+    <string name="lbl_consultancy">Consultoria</string>
+    <string name="lbl_currency"></string>
+    <string name="lbl_email_address">Endereço de e-mail</string>
+    <string name="lbl_failed_login">Nome do usuário/senha está incorreto</string>
+    <string name="lbl_improvements">Aprimoramentos</string>
+    <string name="lbl_maintenance">Manutenção</string>
+    <string name="lbl_reportall">Relatório de todas as Ordens de Serviço</string>
+    <string name="lbl_service_order_id">Ordem de Serviço ID</string>
+    <string name="lbl_space"></string>
+    <string name="lbl_submit">Enviar</string>
+    <string name="lbl_support">Suporte</string>
+    <string name="lbl_uncategorised">Sem Categoria</string>
+    <string name="msg_error_send_email">Não há aplicativo de e-mail</string>
+    <string name="msg_send_email">Enviando e-mail</string>
+    <string name="title_activity_about">Sobre</string>
+    <string name="title_activity_dashboard">Painel</string>
+    <string name="title_activity_reports">Relatórios</string>
 
 </resources>

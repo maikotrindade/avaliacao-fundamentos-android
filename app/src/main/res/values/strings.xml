@@ -40,14 +40,13 @@
     <string name="lbl_confirm">Confirm</string>
     <string name="lbl_share">Share</string>
     <string name="lbl_share_option">Choose one option</string>
-    <string name="lbl_dollar">"U$"</string>
-    <string name="lbl_space">" "</string>
+    <string name="lbl_space" translatable="false">" "</string>
     <string name="lbl_failed_login">Username/password is incorrect</string>
     <string name="lbl_active">Active?</string>
     <string name="filter">Filter</string>
     <string name="active">Active</string>
     <string name="inactive">Inactive</string>
-    <string name="lbl_currency">"U$ "</string>
+    <string name="lbl_currency" translatable="false">"U$ "</string>
     <string name="lbl_improvements">Improvements</string>
     <string name="lbl_support">Support</string>
     <string name="lbl_maintenance">Maintenance</string>
